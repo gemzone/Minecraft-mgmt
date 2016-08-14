@@ -21,5 +21,4 @@ public class CoUsernameLogService
 	CoUsernameLogJpaRepository coUsernameLogJpaRepository;
 	
 	
-	
 }

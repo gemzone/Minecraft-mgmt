@@ -33,6 +33,11 @@ public interface CoBlockJpaRepository extends JpaRepository<CoBlock, Integer>
     		+ "FROM co.co_block "
     		+ "ORDER BY rowid DESC "
     		+ "LIMIT :start, :count", nativeQuery = true )
-        public List<CoBlock> listMore(@Param("start") int start,  @Param("count") int count);
+    public List<CoBlock> listMore(@Param("start") int start,  @Param("count") int count);
+    
+    
+    @Query(value = "SELECT rowid FROM co.co_block ORDER BY rowid DESC LIMIT 0, 1" , nativeQuery = true)
+    public Long limitCount();
+    
 }
 

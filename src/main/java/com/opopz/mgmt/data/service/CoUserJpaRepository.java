@@ -1,6 +1,7 @@
 package com.opopz.mgmt.data.service;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.opopz.mgmt.data.domain.CoUser;
 
@@ -10,8 +11,7 @@ import com.opopz.mgmt.data.domain.CoUser;
  */
 public interface CoUserJpaRepository extends JpaRepository<CoUser, Integer>
 {
-	
-	
-	
+	@Query(value="SELECT COUNT(rowid) FROM co.co_user WHERE uuid IS NOT NULL", nativeQuery = true)
+	public Integer uniqueUserCount();
 	
 }

@@ -1,13 +1,18 @@
 package com.opopz.mgmt.data.domain;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -23,12 +28,11 @@ public class CoUser implements java.io.Serializable
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	@OneToMany(mappedBy="user")
 	private Integer rowid;
 	private Integer time;
 	private String user;
 	private String uuid;
-
+	
 	public CoUser()
 	{
 	}
@@ -42,8 +46,8 @@ public class CoUser implements java.io.Serializable
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "rowid", unique = true, nullable = false)
+	
+	@JoinColumn(name = "rowid", unique = true, nullable = false)
 	public Integer getRowid()
 	{
 		return this.rowid;
