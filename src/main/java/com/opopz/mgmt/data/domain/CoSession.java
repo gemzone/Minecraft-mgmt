@@ -4,7 +4,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -21,18 +25,35 @@ public class CoSession implements java.io.Serializable
 	private static final long serialVersionUID = 1L;
 	private Integer rowid;
 	private Integer time;
-	private Integer user;
+	//private Integer user;
 	private Integer wid;
 	private Integer x;
 	private Integer y;
 	private Integer z;
 	private Integer action;
 
+
+	private CoUser user;
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="user")
+	public CoUser getUser()
+	{
+		return this.user;
+	}
+
+	public void setUser(CoUser user)
+	{
+		this.user = user;
+	}
+	
+	
+	
 	public CoSession()
 	{
 	}
 
-	public CoSession(Integer time, Integer user, Integer wid, Integer x, Integer y, Integer z, Integer action)
+	public CoSession(Integer time, CoUser user, Integer wid, Integer x, Integer y, Integer z, Integer action)
 	{
 		this.time = time;
 		this.user = user;
@@ -68,16 +89,16 @@ public class CoSession implements java.io.Serializable
 		this.time = time;
 	}
 
-	@Column(name = "user")
-	public Integer getUser()
-	{
-		return this.user;
-	}
-
-	public void setUser(Integer user)
-	{
-		this.user = user;
-	}
+//	@Column(name = "user")
+//	public Integer getUser()
+//	{
+//		return this.user;
+//	}
+//
+//	public void setUser(Integer user)
+//	{
+//		this.user = user;
+//	}
 
 	@Column(name = "wid")
 	public Integer getWid()

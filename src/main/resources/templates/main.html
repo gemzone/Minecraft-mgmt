@@ -17,9 +17,6 @@
     <!-- Custom CSS -->
     <link href="./dist/css/sb-admin-2.css" rel="stylesheet" />
 
-    <!-- Morris Charts CSS -->
-    <link href="./bower_components/morrisjs/morris.css" rel="stylesheet" />
-
     <!-- Custom Fonts -->
     <link href="./bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 
@@ -39,11 +36,6 @@
     <!-- Metis Menu Plugin JavaScript -->
     <script src="./bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
-    <!-- Morris Charts JavaScript -->
-    <script src="./bower_components/raphael/raphael-min.js"></script>
-    <script src="./bower_components/morrisjs/morris.min.js"></script>
-    <script src="./js/morris-data.js"></script>
-
     <!-- Custom Theme JavaScript -->
     <script src="./dist/js/sb-admin-2.js"></script>
     <script src="./js/function.js"></script>
@@ -61,7 +53,6 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="main">NK Minecraft</a>
-                <small>opopz.com</small>
             </div>
             <!-- /.navbar-header -->
 
@@ -91,47 +82,6 @@
                         <li>
                             <a href="container"><i class="fa fa-th fa-fw"></i> 컨테이너</a>
                         </li>
-
-<!-- 월드 이름 -->
-<!-- SELECT * FROM co.co_world; -->
-
-<!-- SELECT * FROM co.co_username_log; -->
-<!-- udid -->
-
-
-<!-- SELECT * FROM co.co_user ORDER BY rowid DESC LIMIT 0, 10  -->
-<!-- 유저 -->
-
-
-<!-- 표지판관리 -->
-<!--  SELECT * FROM co.co_sign; -->
-
-
-
-<!-- 유저 세션
-SELECT * FROM co.co_session AS s
-LEFT JOIN co.co_user AS u ON s.user = u.rowid 
-ORDER BY s.rowid DESC LIMIT 0, 100
- -->
-
-
-
-<!-- user log 
-SELECT c.rowid, c.time, c.user, c.wid, c.x, c.y, c.z, c.type, c.amount, c.meta, c.action, c.rolled_back, u.user AS user_name, u.uuid
-FROM co.co_container AS c
-LEFT JOIN co.co_user AS u ON c.user = u.rowid 
-ORDER BY c.rowid DESC LIMIT 0, 100
-
--->
-
-<!--  블럭 로그
-
-SELECT b.rowid, b.time, b.user, b.wid, b.x, b.y, b.z, b.type, b.meta, b.action, b.rolled_back, u.user AS user_name, u.uuid
-FROM co.co_block AS b
-LEFT JOIN co.co_user AS u ON b.user = u.rowid 
-ORDER BY b.rowid DESC LIMIT 0, 100
-
- -->
 
 
 
@@ -163,11 +113,11 @@ ORDER BY b.rowid DESC LIMIT 0, 100
                                     <div class="huge">
                                         <span th:text="${totalBlockCount}">0</span>
                                     </div>
-                                    <div>블럭 이벤트수</div>
+                                    <div>전체 블럭 이벤트수</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="block">
                             <div class="panel-footer">
                                 <span class="pull-left">상세보기</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -189,11 +139,11 @@ ORDER BY b.rowid DESC LIMIT 0, 100
                                     <div class="huge">
                                         <span th:text="${uniqueUserCount}">0</span>    
                                     </div>
-                                    <div>고유 유저수</div>
+                                    <div>전체 유저수</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="user">
                             <div class="panel-footer">
                                 <span class="pull-left">상세 보기</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -250,28 +200,28 @@ ORDER BY b.rowid DESC LIMIT 0, 100
                     <div class="chat-panel panel panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-comments fa-fw"></i>
-                            채팅기록
+                            최근채팅
                             <div class="btn-group pull-right"></div>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <ul class="chat">
 
-                                <li class="left clearfix" th:each="coChat : ${chatList.content}">
+                                <li class="left clearfix" th:each="o : ${chatList.content}">
                                     <span class="chat-img pull-left">
-                                        <img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle" />
+                                        <img th:src="@{'https://crafatar.com/avatars/' + ${o.user.user} + '?size=50'}" alt="Avatar" class="img-circle" />
                                     </span>
                                     <div class="chat-body clearfix">
                                         <div class="header">
                                             
-                                            <strong class="primary-font" th:text="${coChat.user.user}">Jack Sparrow</strong>
-                                            <small>(<span th:text="${coChat.user.rowid}">1</span>)</small>
+                                            <strong class="primary-font" th:text="${o.user.user}">Jack Sparrow</strong>
+                                            <!-- <small>(<span th:text="${o.user.rowid}">1</span>)</small> -->
                                             <small class="pull-right text-muted">
                                                 <i class="fa fa-clock-o fa-fw"></i> 
-                                                <span th:text="${coChat.time}">12 mins ago</span>
+                                                <span th:text="${o.time}">12 mins ago</span>
                                             </small>
                                         </div>
-                                        <p th:text="${coChat.message}">
+                                        <p th:text="${o.message}">
                                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
                                         </p>
                                     </div>
@@ -279,44 +229,48 @@ ORDER BY b.rowid DESC LIMIT 0, 100
 
                             </ul>
                         </div>
-                        <!-- /.panel-body 
-                        <div class="panel-footer">
-                            <div class="input-group">
-                                <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here...">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-warning btn-sm" id="btn-chat">
-                                        Send
-                                    </button>
-                                </span>
-                            </div>
-                        </div>-->
-                        <!-- /.panel-footer -->
                     </div>
                 </div>
 
-<!--
-                <h3>채팅로그<small>realtime</small></h3>
-                <div class="table-responsive table-bordered">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th style="width:50px;">ID</th>
-                                <th style="width:150px;">이름</th>
-                                <th>내용</th>
-                                <th style="width:200px;">시간</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="coChat : ${chatList.content}">
-                                <td th:text="${coChat.rowid}">1</td>
-                                <td th:text="${coChat.user}">user</td>
-                                <td th:text="${coChat.message}">message</td>
-                                <td th:text="${coChat.time}">time</td>
-                            </tr>
-                        </tbody>
-                    </table>
+
+
+
+
+                <div class="col-lg-6 col-md-12">
+                    <div class="chat-panel panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-user fa-fw"></i>
+                            최근활동
+                            <div class="btn-group pull-right"></div>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <ul class="chat">
+                                <li class="left clearfix"  th:each="o : ${sessionList.content}">
+                                    <span class="chat-img pull-left">
+                                        <img th:src="@{'https://crafatar.com/avatars/' + ${o.user.user} + '?size=24'}" alt="Avatar" class="img-circle" />
+                                    </span>
+                                    <div class="chat-body clearfix">
+                                        <div class="header">
+                                            <strong style="width:120px;display:inline-block;" class="primary-font" th:text="${o.user.user}">Jack Sparrow</strong>
+                                            <span>
+                                                <span class="primary-font" th:text="${o.x}">1</span>
+                                                <span class="primary-font" th:text="${o.y}">1</span>
+                                                <span class="primary-font" th:text="${o.z}">1</span>
+                                            </span>    
+                                            <small class="pull-right text-muted">
+                                                <i class="fa fa-clock-o fa-fw"></i> 
+                                                <span th:text="${o.time}">12 mins ago</span>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                -->
+
 			</div>
 			<!-- /.row -->
 
