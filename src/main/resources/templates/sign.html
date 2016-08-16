@@ -15,6 +15,117 @@
 				<!-- /.col-lg-12 -->
 			</div>
 
+			<div class="row">
+				<div class="col-sm-6" style="margin-bottom:5px;">
+					<div class="dataTables_length" id="dataTables-example_length">
+					
+						<form action="sign" method="get">
+							<div class="input-group">
+								<input type="text" class="form-control input-sm"
+									placeholder="통합검색" name="name" th:value="${searchName}" /> <span
+									class="input-group-btn">
+									<button class="btn btn-default input-sm" type="submit">
+										<i class="fa fa-search"></i>
+									</button>
+								</span>
+							</div>
+							<input type="hidden" class="form-control" placeholder="페이지"
+								name="page" th:value="${signCurrentPage}" />
+						</form>
+					</div>
+				</div>
+				<div class="col-sm-6" style="margin-bottom:5px;">
+					<div id="dataTables-example_filter" class="dataTables_filter" style="text-align:right;">
+						<div class="input-group">
+							<input type="text" class="form-control input-sm" placeholder="페이지" th:value="${signCurrentPage}" />
+							<span class="input-group-btn">
+								<button class="btn btn-default input-sm">이동</button>
+								<a th:href="@{'sign?page=' + ${signPagePrev} + '&amp;name=' + ${searchName} }">
+								<button class="btn btn-link input-sm">
+									이전
+								</button></a>
+								<a th:href="@{'sign?page=' + ${signPageNext} + '&amp;name=' + ${searchName} }">
+								<button class="btn btn-link input-sm">
+									다음
+								</button></a>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<!-- page start -->
+			<div class="row">
+			
+				<div class="col-lg-2" th:each="o : ${signList.content}">
+					
+					<!--  private 표지판 -->
+					<div th:if="${o.line1} == '[Private]'">
+					
+	                    <div class="panel panel-green">
+	                        <div class="panel-heading" th:text="${o.user.user}">
+	                            username
+	                        </div>
+	                        <div class="panel-body" style="font-size:12px;">
+	                        	<span th:text="${o.line1}">line1</span><br />
+	                        	<span th:text="${o.line2}">line2</span><br />
+	                        	<span th:text="${o.line3}">line3</span><br />
+	                        	<span th:text="${o.line4}">line4</span><br />
+	                        </div>
+	                        <div class="panel-footer">
+	                            <a th:href="@{'http://nikemc.com/map/#/' + ${o.x} + '/' + ${o.y} + '/' + ${o.z} + '/-3/0/0' }"
+									target="_blank"> <span th:text="${o.x}">1</span> <span
+										th:text="${o.y}">1</span> <span th:text="${o.z}">1</span>
+								</a>
+	                        </div>
+	                    </div>
+                	</div>
+               		
+                	<!--  일반 표지판 -->
+					<div th:if="${o.line1} != '[Private]'">
+					
+	                    <div class="panel panel-primary">
+	                        <div class="panel-heading" th:text="${o.user.user}">
+	                            username
+	                        </div>
+	                        <div class="panel-body" style="font-size:12px;">
+	                        	<span th:text="${o.line1}">line1</span><br />
+	                        	<span th:text="${o.line2}">line2</span><br />
+	                        	<span th:text="${o.line3}">line3</span><br />
+	                        	<span th:text="${o.line4}">line4</span><br />
+	                        </div>
+	                        <div class="panel-footer">
+	                            <a th:href="@{'http://nikemc.com/map/#/' + ${o.x} + '/' + ${o.y} + '/' + ${o.z} + '/-3/0/0' }"
+									target="_blank"> <span th:text="${o.x}">1</span> <span
+										th:text="${o.y}">1</span> <span th:text="${o.z}">1</span>
+								</a>
+	                        </div>
+	                    </div>
+                	</div>
+                
+                
+                
+                
+                
+                
+                </div>
+			
+			
+			
+			
+			
+			
+			
+			
+			</div>
+
+
+
+
+
+
+
 		</div>
 	</div>
 </body>

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"  />
     <meta name="description" content=""  />
     <meta name="author" content=""  />
-    <title>NK Minecraft - Admin Tool</title>
+    <title>NIKE MineCraft - Admin Tool</title>
     <!-- Bootstrap Core CSS -->
     <link href="./bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <!-- MetisMenu CSS -->
@@ -52,7 +52,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="main">NK Minecraft</a>
+                <a class="navbar-brand" href="main">NIKE MineCraft</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -113,7 +113,7 @@
                                     <div class="huge">
                                         <span th:text="${totalBlockCount}">0</span>
                                     </div>
-                                    <div>전체 블럭 이벤트수</div>
+                                    <div>블럭 이벤트수</div>
                                 </div>
                             </div>
                         </div>
@@ -153,19 +153,19 @@
                         
                     </div>
                 </div>
-                <!--
+               
                 <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-primary">
+                    <div class="panel panel-red">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-fa-archive fa-5x"></i>
+                                    <i class="fa fa-warning fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge">
                                         <span th:text="${uniqueUserCount}">0</span>    
                                     </div>
-                                    <div>고유 유저수</div>
+                                    <div>경고 이벤트 수</div>
                                 </div>
                             </div>
                         </div>
@@ -179,7 +179,6 @@
                         
                     </div>
                 </div>
-                -->
             </div>
             <!-- /.row -->
             
@@ -254,9 +253,11 @@
                                         <div class="header">
                                             <strong style="width:120px;display:inline-block;" class="primary-font" th:text="${o.user.user}">Jack Sparrow</strong>
                                             <span>
+                                            	<a th:href="@{'http://nikemc.com/map/#/' + ${o.x} + '/' + ${o.y} + '/' + ${o.z} + '/-3/0/0' }" target="_blank">
                                                 <span class="primary-font" th:text="${o.x}">1</span>
                                                 <span class="primary-font" th:text="${o.y}">1</span>
                                                 <span class="primary-font" th:text="${o.z}">1</span>
+                                                </a>
                                             </span>    
                                             <small class="pull-right text-muted">
                                                 <i class="fa fa-clock-o fa-fw"></i> 
